@@ -1,6 +1,7 @@
 /*
  *	/// /// /// /// README /// /// /// ///
  */
+INFO FOR BINARY FILE GIVEN AT THE END!
 
 This is the implementation of AVL search tree in C++.
 Insertions are performed just as the algorithm instructs,
@@ -27,3 +28,12 @@ Then:
 
 -->After this stage, you will come across the MENU, where you can perform
 insertion and Traversal operations on the AVL search tree.
+
+BINARY FILE INCLUDED IN THIS PROJECT
+I compiled this binary file on ARCH Linux  x86_64, i.e., 64-bit Linux platform.
+Run the file as:
+
+$ ./avl_search_tree
+
+on a 64 bit Linux machine.
+I will post a 32 bit version later.
