@@ -1,0 +1,29 @@
+/*
+ *	/// /// /// /// README /// /// /// ///
+ */
+
+This is the implementation of AVL search tree in C++.
+Insertions are performed just as the algorithm instructs,
+along with a recursive function checking for any inconsistency in balance
+factor.
+
+Input format is simple. Just follow the on-screen instructions.
+ONLY one thing you need to be warned of, is that I used a "cin>>tmp"
+hack to make the screen pause wherever applicable. So, you need to insert
+an integer to get rid of the interrupt.
+Like, if you want to insert 1, 2, 3, 4, 5,
+I would first enter the number of elements, i. e., 5.
+Then:
+1
+<some random integer>
+2
+<some random integer>
+3
+<some random integer>
+4
+<some random integer>
+5
+<some random integer>
+
+-->After this stage, you will come across the MENU, where you can perform
+insertion and Traversal operations on the AVL search tree.
