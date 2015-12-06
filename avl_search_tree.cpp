@@ -153,54 +153,60 @@ class tree
  * This function is meant to be called from calcDepth() if difference of two
  * subtrees' depths is not b/w -1 and 1. This function if called with the node 
  * which is to be rotated as an argument.
- * This function looks two nodes deep to decide rotation to be used
- * 	Find greater of the two children of current node(also, use 0 if no child)
- * 		i. if left, check:
- * 			 check for greater of the two children of the left child
- * 				if left, llRotate(curr)
- * 				if right, lrRotate(curr)
- * 		ii. if right, check:
- * 			 check for greater of the two children of the child
- * 				if left, rlRotate(curr)
- * 				if right, rrRotate(curr)
+ * 
+ * Changed method:
+ * 
+ * Performs a binary search to find which node is causing the tree to be 
+ * unbalanced... Value of last inserted integer has to be stored in the
+ * variable "last"
  * 
  */
 	void rotationControl(node *curr)
 	{
-		int l=0, r=0, ll=0, lr=0, rl=0, rr=0;
-		//Finding nodes which exist, and keeping the depths for further use
-		if(curr->c1!=NULL)//if c1 exists
-		{
-			l=curr->c1->depth;
-			if(curr->c1->c1!=NULL) //if left of left exists
-			ll=curr->c1->c1->depth;
-			if(curr->c1->c2!=NULL) //if right of left exists
-			lr=curr->c1->c2->depth;
-		}
-		if(curr->c2!=NULL)//if c2 exists
-		{
-			r=curr->c2->depth;
-			if(curr->c2->c1!=NULL) //if left of right exists
-			rl=curr->c2->c1->depth;
-			if(curr->c2->c2!=NULL) //if right of right exists
-			rr=curr->c2->c2->depth;
-		}
+		int i=0;
+		int tmp;
 		
-		//Now, time to decide rotation
-		if(l>r) //if depth of left child > right child
+		while(i<2&&curr!=NULL)
 		{
-			if(ll>lr) //if depth of left sub-child > right sub-child
-			llRotate(curr);
-			else //if depth of right sub-child > left sub-child
-			lrRotate(curr);
+			if(last<curr->info)//means left
+				{
+					if(curr->c1!=NULL)
+					{
+						if(last<curr->c1->info) //means ll
+					{
+						llRotate(curr);
+						cin>>tmp;
+						return;
+					}
+					else//means lr
+					{
+						lrRotate(curr);
+						cin>>tmp; 
+						return;
+					}
+					}
+				}
+			
+			else if(last>curr->info)//means right
+				{
+					if(curr->c2!=NULL)
+					{
+						if(last<curr->c2->info)//means rl
+						{
+							rlRotate(curr);
+							cin>>tmp;return;
+						}
+						else//means rr
+						{
+							rrRotate(curr); 
+							cin>>tmp;return;
+						}
+					}
+				}
+			
+			i++;
 		}
-		else //if depth of right child > left child
-		{
-			if(rl>rr) //if depth of left sub-child > right sub-child
-			rlRotate(curr);
-			else //if depth of right sub-child > left sub-child
-			rrRotate(curr);
-		}
+		return;
 	}
 	
 	void insert(int info)
