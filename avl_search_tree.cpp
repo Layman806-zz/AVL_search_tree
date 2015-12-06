@@ -261,8 +261,41 @@ class tree
 int main()
 {
 	tree a;
-	a.insert(64); a.insert(1); a.insert(14); a.insert(3); a.insert(0);
-	//a.insert(141);
-	//a.insert(4); a.insert(5); a.insert(6);
+	int tmp, n;
+	cout<<"\nEnter number of elements in list. I will take them and arrange";
+	cout<<" in an AVL search tree :";
+	cin>>n;
+	for(int i=0; i<n; i++)
+	{
+		cin>>tmp;
+		a.insert(tmp);
+	}
+	while(1)
+	{
+		switch(menu())
+		{
+			case 1: cout<<"\nEnter element: ";
+					 cin>>tmp;
+					 a.insert(tmp);
+					 break;
+			case 2: cout<<"\nDeletion not yet implemented!";
+					break;
+			case 3: cout<<"\nEnter element to search for: ";
+					cin>>tmp;
+					a.search(tmp);
+					a.displayTree();
+					cin>>tmp;
+					break;
+					
+			case 4: cout<<"\nTraversing!!";
+					a.traverse();
+					cin>>tmp;
+					break;
+			case 5: a.displayTree(); cin>>tmp;break;
+			case 6: exit(0);break;
+			default:
+			cout<<"Enter a no. b/w zero and seven (0-7) only!!";
+		}
+	}
 	return 0;
 }
