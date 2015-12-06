@@ -29,42 +29,86 @@ class tree
  */	
 	void llRotate(node *curr)
 	{
+		cout<<"\nllRotate";
 		node *tmp=curr->c1;
+		if(curr->prev!=NULL) 
+			{
+				if(curr->prev->c1==curr) curr->prev->c1=tmp;
+				else curr->prev->c2=tmp;
+			}
 		tmp->prev=curr->prev;
 		curr->prev=tmp;
 		curr->c1=tmp->c2;
+		if(curr->c1!=NULL)
+			curr->c1->prev=curr;
 		tmp->c2=curr;
+		if(curr==head)
+		head=tmp;
 	}
 	
 	void rrRotate(node *curr)
 	{
+		cout<<"\nrrRotate";
 		node *tmp=curr->c2;
+		if(curr->prev!=NULL) 
+			{
+				if(curr->prev->c1==curr) curr->prev->c1=tmp;
+				else curr->prev->c2=tmp;
+			}
+
 		tmp->prev=curr->prev;
 		curr->prev=tmp;
 		curr->c2=tmp->c1;
+		if(curr->c2!=NULL)
+			curr->c2->prev=curr;
 		tmp->c1=curr;
+		if(curr==head)
+		head=tmp;
 	}
 	
 	void lrRotate(node *curr)
 	{
-		node *tmp1=curr->c1, *tmp2=tmp1->c2;
+		cout<<"\nlrRotate";
+		node *tmp1=curr->c1, *tmp2=curr->c1->c2;
+		if(curr->prev!=NULL)
+		{
+			if(curr->prev->c1==curr)
+			curr->prev->c1=tmp2;
+			else
+			curr->prev->c2=tmp2;
+		}
 		tmp2->prev=curr->prev;
-		tmp1->c2=tmp2->c1; tmp1->c2->prev=tmp1;
-		curr->c1=tmp2->c2; curr->c1->prev=curr;
-		tmp2->c1=tmp1; tmp2->c1->prev=tmp2;
-		tmp2->c2=curr; tmp2->c2->prev=tmp2;
-		if(curr==head)
+		tmp1->c2=tmp2->c1;
+		if(tmp1->c2!=NULL) tmp1->c2->prev=tmp1;//changing the child's parent
+		curr->c1=tmp2->c2;
+		if(curr->c1!=NULL) curr->c1->prev=curr;//changing the child's parent
+		tmp2->c2=curr;
+		if(tmp2->c2!=NULL)//I know, I don't need to check this
+		tmp2->c2->prev=tmp2;
+		tmp2->c1=tmp1;
+		if(tmp2->c1!=NULL) tmp2->c1->prev=tmp2;//changing the child's parent
+		if(head==curr)
 		head=tmp2;
 	}
 	
 	void rlRotate(node *curr)
 	{
-		node *tmp1=curr->c2, *tmp2=tmp1->c1;
+		cout<<"\nrlRotate";
+		node *tmp1=curr->c2, *tmp2=curr->c2->c1;
 		tmp2->prev=curr->prev;
-		tmp1->c1=tmp2->c2; tmp1->c1->prev=tmp1;
-		curr->c2=tmp2->c1; curr->c2->prev=curr;
-		tmp2->c1=curr; tmp2->c1->prev=tmp2;
-		tmp2->c2=tmp1; tmp2->c2->prev=tmp2;
+		if(curr->prev!=NULL) //changing parent
+		{
+			if(curr==curr->prev->c1) curr->prev->c1=tmp2;
+			else curr->prev->c2=tmp2;
+		}
+		curr->c2=tmp2->c1;
+		if(curr->c2!=NULL) curr->c2->prev=curr; //changing parent
+		tmp1->c1=tmp2->c2;
+		if(tmp1->c1!=NULL) tmp1->c1->prev=tmp1; //changing parent
+		tmp2->c1=curr;
+		if(tmp2->c1!=NULL) tmp2->c1->prev=tmp2; //changing parent
+		tmp2->c2=tmp1;
+		if(tmp2->c2!=NULL) tmp2->c2->prev=tmp2; // changing parent
 		if(curr==head)
 		head=tmp2;
 	}
