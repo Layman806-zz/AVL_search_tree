@@ -123,59 +123,27 @@ class tree
  */
 	void calcDepth(node *curr)
 	{
-		int l=0, r=0, d=0;
+		int l=0, r=0, balancefactor=0;
 		if(curr==NULL)return;
-		if(curr->c1==NULL&&curr->c2==NULL)	   /*if curr has no children, 
-												*	i.e., curr is a leaf
-												*/
-		{
-			curr->depth=1;
-			calcDepth(curr->prev);
-			return;
-		}
-		if(curr->c1!=NULL) //check next condition only if curr has left child
-		{
-			if(curr->c1->depth==0) /* 
-								* if c1->depth not yet calculated, or reset by 
-								* traverse()
-								*/ 
-			{
-				calcDepth(curr->c1);
-				//l=curr->c1->depth;
-			}
-			/*else //if c1 has depth
-			l=curr->c1->depth;
-			* I directly access depth for calculating d, now
-			* */
-			
-		}
 		
-		if(curr->c2!=NULL) //check next condition only if curr has right child
-		{
-			if(curr->c2->depth==0) /* 
-								* if c2->depth not yet calculated, or reset by 
-								* traverse()
-								*/
-			{
-				calcDepth(curr->c2);
-				//r=curr->c2->depth;
-			}
-			/*else //if c2 has depth
-			 * * I directly access depth for calculating d, now
-			* 
-			r=curr->c2->depth; do nothing*/
-		}
-		d=(curr->c1->depth)-(curr->c2->depth);
-		if(!((d>=-1)&&(d<=1)))
+		if(curr->c1!=NULL)
+		l=curr->c1->depth;
+		
+		if(curr->c2!=NULL)
+		r=curr->c2->depth;
+		
+		balancefactor=l-r;
+		if(!((balancefactor>=-1)&&(balancefactor<=1)))
 		{
 			rotationControl(curr);
+			curr->depth=(l>r)?(l+1):(r+1);
+			calcDepth(curr);
 			return;
 		}
 		else
 		{
 			curr->depth=(l>r)?(l+1):(r+1);
-			if(l==r)curr->depth=l+1;
-			if(curr->prev!=NULL) //if curr is not the head
+			if(curr!=head) //if curr is not the head
 			calcDepth(curr->prev);
 		}
 	}
