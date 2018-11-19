@@ -1,13 +1,17 @@
-/*
- *	/// /// /// /// README /// /// /// ///
- */
-INFO FOR BINARY FILE GIVEN AT THE END!
+The C++ version is one I implemented a long time ago, and may have bugs.
+Look at the C version for the correct code, tested with numerous corner cases.
 
-This is the implementation of AVL search tree in C++.
+This is the implementation of AVL search tree in C++ and in C.
 Insertions are performed just as the algorithm instructs,
 along with a recursive function checking for any inconsistency in balance
 factor.
 
+Newer, C variant:
+Input format: Number of elements, followed by the elements.
+Output: Shows preorder traversal of tree.
+(Inorder traversal is obviously the list of sorted elements)
+
+Older, C++ variant:
 Input format is simple. Just follow the on-screen instructions.
 ONLY one thing you need to be warned of, is that I used a "cin>>tmp"
 hack to make the screen pause wherever applicable. So, you need to insert
@@ -36,4 +40,3 @@ Run the file as:
 $ ./avl_search_tree
 
 on a 64 bit Linux machine.
-I will post a 32 bit version later.
